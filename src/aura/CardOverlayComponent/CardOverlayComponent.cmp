@@ -4,10 +4,10 @@
 
 <aura:component description="CardOverlayComponent" extends="c:CommonComponent" extensible="true" abstract="true" >
 
-    <aura:attribute name="cardIcon"     type="String" default="standard:product_item" />
-    <aura:attribute name="cardLabel"    type="String" default="Some card" />
+    <aura:attribute name="cardIcon"     type="String" default="standard:product_item" access="public" />
+    <aura:attribute name="cardLabel"    type="String" default="Some card" access="public" />
 
-    <aura:attribute name="cardButtons" type="Aura.Component[]"/>
+    <aura:attribute name="cardButtons" type="Aura.Component[]" access="public" />
 
     <article class="slds-card">
         <div class="slds-card__header slds-grid">
