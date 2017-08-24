@@ -1,0 +1,7 @@
+<!--
+ - Created by Stefan Abramiuk on 24.08.2017.
+ -->
+
+<aura:component description="CommonComponent" extensible="true" abstract="true" >
+    {!v.body}
+</aura:component>

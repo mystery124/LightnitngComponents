@@ -1,0 +1,39 @@
+<!--
+ - Created by Stefan Abramiuk on 24.08.2017.
+ -->
+
+<aura:component description="CardOverlayComponent" extends="c:CommonComponent" extensible="true" abstract="true" >
+
+    <aura:attribute name="cardIcon"     type="String" default="standard:product_item" />
+    <aura:attribute name="cardLabel"    type="String" default="Some card" />
+
+    <aura:attribute name="cardButtons" type="Aura.Component[]"/>
+
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <div aura:id="cardIconId" >
+                        <lightning:icon iconName="{!v.cardIcon}" size="small" alternativeText="test"/>
+                    </div>
+                    <div aura:id="cardSpinner" class="spinnerDiv slds-hide" >
+                        <span class="slds-is-relative spinnerWrapper">
+                            <lightning:spinner variant="brand" alternativeText="Loading..." size="small" />
+                        </span>
+                    </div>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <span class="slds-text-heading--small">{!v.cardLabel}</span>
+                    </h2>
+                </div>
+            </header>
+            <div class="slds-no-flex">
+                    {!v.cardButtons}
+            </div>
+        </div>
+        <div class="slds-card__body cardBody">
+                {!v.body}
+        </div>
+    </article>
+</aura:component>
