@@ -2,6 +2,39 @@
  * Created by Stefan Abramiuk on 24.08.2017.
  */
 ({
+    callServer : function(cmp, actionName, parameters, onSuccess, onError, isStorable, isAbortable){
+        var action = cmp.get(actionName);
+        if(parameters){
+            action.setParams(parameters);
+        }
+        if(isAbortable){
+            action.setAbortable();
+        }
+        if(isStorable){
+            action.setStorable();
+        }
+        action.setCallback(this, function(response){
+            if(response){
+                var state = response.getState();
+                if(cmp.isValid()){
+                    if (state === "SUCCESS"){
+                        var result = response.getReturnValue();
+                        onSuccess(result);
+                    } else if(state == "ERROR"){
+                        var errors = response.getError();
+                        if(!onError){
+                            this.handleError(errors);
+                        } else {
+                            onError(errors);
+                        }
+                    }
+                }
+            } else {
+                onSuccess();
+            }
+        });
+        $A.enqueueAction(action);
+    },
     showToast : function(type, title, message) {
         var toastEvent = $A.get("e.force:showToast");
         if(toastEvent) {
@@ -48,39 +81,6 @@
             }
             this.showToast('error', $A.get("$Label.c.Error"), errors[0].message);
         }
-    },
-    callServer : function(cmp, actionName, parameters, onSuccess, onError, isStorable, isAbortable){
-        var action = cmp.get(actionName);
-        if(parameters){
-            action.setParams(parameters);
-        }
-        if(isAbortable){
-            action.setAbortable();
-        }
-        if(isStorable){
-            action.setStorable();
-        }
-        action.setCallback(this, function(response){
-            if(response){
-                var state = response.getState();
-                if(cmp.isValid()){
-                    if (state === "SUCCESS"){
-                        var result = response.getReturnValue();
-                        onSuccess(result);
-                    } else if(state == "ERROR"){
-                        var errors = response.getError();
-                        if(!onError){
-                            this.handleError(errors);
-                        } else {
-                            onError(errors);
-                        }
-                    }
-                }
-            } else {
-                onSuccess();
-            }
-        });
-        $A.enqueueAction(action);
     },
     navigateToSObject : function(recordId){
         var navEvt = $A.get("e.force:navigateToSObject");
