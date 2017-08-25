@@ -1,0 +1,21 @@
+<!--
+ - Created by Stefan Abramiuk on 24.08.2017.
+ -->
+
+<aura:component description="SampleComponent"
+                extends="c:CardOverlayComponent"
+                implements="flexipage:availableForAllPageTypes,force:hasRecordId"
+                access="global">
+
+    <aura:attribute name="recordId" type="String" />
+
+    <aura:set attribute="cardIcon"  value="standard:apps" />
+    <aura:set attribute="cardLabel" value="{!v.label + '(' +v.originalRows.length +')'}" />
+
+    <aura:set attribute="cardButtons" >
+            <lightning:button label="{!$Label.c.New}" onclick="{!c.createRecord}"/>
+    </aura:set>
+
+    Something here
+
+</aura:component>

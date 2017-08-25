@@ -1,0 +1,39 @@
+<!--
+ - Created by Stefan Abramiuk on 25.08.2017.
+ -->
+
+<aura:component description="ConfirmDialog">
+
+    <aura:attribute name="header" required="true" type="String" access="public" />
+    <aura:attribute name="message" required="true" type="String" access="public" />
+    <aura:attribute name="showSpinner" required="true" type="Boolean" default="false" access="public" />
+    <aura:attribute name="dialogButtons" type="Aura.Component[]" access="public" />
+
+    <div >
+        <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h2 id="header43" class="slds-text-heading--medium">
+                            {!v.header}
+                    </h2>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium">
+                    <div class="slds-form-element slds-align--absolute-center">
+                        <div class="slds-form-element__control">
+                                {!v.message}
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <div class="slds-float--right">
+                            {!v.cardButtons}
+                    </div>
+                    <div class="slds-is-relative">
+                        <lightning:spinner aura:id="modalSpinner" class="{!v.showSpinner ? '' : 'slds-hide' }" size="small" variant="brand" alternativeText="In progress..." />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-backdrop slds-backdrop--open"></div>
+    </div>
+</aura:component>
