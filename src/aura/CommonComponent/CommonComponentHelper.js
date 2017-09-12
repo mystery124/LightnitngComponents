@@ -13,7 +13,7 @@
         if(isStorable){
             action.setStorable();
         }
-        action.setCallback(this, function(response){
+        action.setCallback(this, $A.getCallback(function(response){
             if(response){
                 var state = response.getState();
                 if(cmp.isValid()){
@@ -32,7 +32,7 @@
             } else {
                 onSuccess();
             }
-        });
+        }));
         $A.enqueueAction(action);
     },
     showToast : function(type, title, message) {
